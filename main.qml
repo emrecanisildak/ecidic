@@ -21,14 +21,16 @@ Window {
         height: parent.height
         x:0
         y:0
-        leftMargin:75               // pixel
-        topMargin:120               // pixel
-        bottomMargin:100            // pixel
-        componentPadding:20         // pixel
+        leftMargin:75               // pixel  // 75
+        topMargin:120               // pixel  // 120
+        bottomMargin:100            // pixel  // 100
+        componentPadding:20         // pixel  // 20
+
+        layoutId: 100
 
         // Colors
         backgroundColor:"black"   // const
-        componentColor:"blue"
+        componentColor:"red"
         componentHighlightColor:"white"
 
 
