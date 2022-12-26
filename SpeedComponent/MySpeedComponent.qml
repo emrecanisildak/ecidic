@@ -7,7 +7,7 @@ Item{
     id:speedComponent
 
     // Base Value
-    property int    speed:120
+    property int    speed:60
     property string speedUnit:"km/h"
 
 
@@ -39,42 +39,80 @@ Item{
 
     }
 
-    Rectangle{
-        id:speedValue
+    // Speed
+
+    Text{
+        id:speedText
         x:leftMargin + privateVar.topWidth/3
-        y: privateVar.componentHeight/2
+        y:privateVar.componentHeight/2
+        z:layoutId +4
+        text:speed.toString()
+        font.family: "Helvetica"
+        font.pointSize: 90
+        color: componentHighlightColor
+    }
+
+    Text{
+        id:speedUnitText
+        text:speedUnit
+        x:leftMargin + (35*privateVar.topWidth/80)
+        y:57*privateVar.componentHeight/80
+        z:layoutId +4
+        font.family: "Helvetica"
+        font.pointSize: 25
+        color: componentHighlightColor
+    }
+
+
+
+    // İç
+    Rectangle{
+        id:speedRect
+        x:leftMargin + privateVar.topWidth/3
+        y: privateVar.componentHeight/2-20  //-13
         z:layoutId+2
-        width:150
-        height:200
+        width:privateVar.topWidth/2 + 10  // 150
+        height:privateVar.componentHeight/2.4 // 250
         color:backgroundColor
-        border.color: "blue"
+        border.color: componentColor
         radius:200
         border.width: 2
         antialiasing: true
+        opacity:0.6
     }
 
-//    Text{
-//        id:speedText
-//        x:leftMargin + 100
-//        y:topMargin + 150
-//        z:layoutId +3
-//        text:speed.toString()
-//        font.family: "Helvetica"
-//        font.pointSize: 60
-//        color: componentHighlightColor
-//    }
+    // Dış
+    Rectangle{
+        id:speedRect2
+        x:leftMargin + privateVar.topWidth/3+1 //+ 1
+        y: privateVar.componentHeight/2-19  //-12
+        z:layoutId+1
+        width:privateVar.topWidth/2  + 10// 150
+        height:privateVar.componentHeight/2.4 // 250
+        color:backgroundColor
+        border.color: componentHighlightColor
+        radius:200
+        border.width: 4
+        antialiasing: true
+        opacity:0.9
+    }
 
-//    Text{
-//        id:speedUnitText
-//        text:speedUnit
-//        x:leftMargin + 100
-//        y:topMargin + 150
-//        z:layoutId +3
-//        font.family: "Helvetica"
-//        font.pointSize: 30
-//        color: componentHighlightColor
-//    }
 
+    // Cover Rect
+    Rectangle{
+        id:speedCoverRect
+        x:leftMargin + privateVar.topWidth/3 -10
+        y: privateVar.componentHeight/2-6
+        z:layoutId+3
+        width:privateVar.topWidth/4  // 150
+        height:privateVar.componentHeight/2.2 // 250
+        color: backgroundColor
+        border.width: 2
+        antialiasing: true
+        opacity:1
+    }
+
+// End speed
 
     // Cover Rect
     Rectangle{
