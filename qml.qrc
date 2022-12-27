@@ -2,5 +2,14 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>SpeedComponent/MySpeedComponent.qml</file>
+        <file>GearComponent/GearComponent.qml</file>
+        <file>StatusBarComponent/StatusBarItem.qml</file>
+        <file>StatusBarComponent/StatusBarComponent.qml</file>
+        <file>StatusBarComponent/icon_statusbar/bluetooth.png</file>
+        <file>StatusBarComponent/icon_statusbar/phone.png</file>
+        <file>StatusBarComponent/icon_statusbar/signal.png</file>
+        <file>StatusBarComponent/icon_statusbar/user.png</file>
+        <file>StatusBarComponent/icon_statusbar/wifi.png</file>
+        <file>MapComponent/MapComponent.qml</file>
     </qresource>
 </RCC>
