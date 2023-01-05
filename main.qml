@@ -12,14 +12,14 @@ import "MapComponent"
 
 Window {
     property string backgroundColor: "black"
-    width: 1800
-    height: 800
-    visible: true
-    color: backgroundColor
-    flags: Qt.FramelessWindowHint
     x:100
     y:100
+    visible: true
+    width: 1800
+    height: 800
 
+    color: backgroundColor
+    flags: Qt.FramelessWindowHint
 
     MySpeedComponent {
         id: speedComponent
@@ -31,12 +31,17 @@ Window {
         topMargin:120
         bottomMargin:100
         componentPadding:20
+
+        // Z Value Component
         layoutId: 100
+
         // Colors
         backgroundColor:backgroundColor
         componentColor:"red"
         componentHighlightColor:"white"
 
+
+        // TODO : Bind speed
         speed: 20
 
     }
@@ -44,17 +49,21 @@ Window {
     // Map Component
     MapComponent {
         id: mapComponent
-        x: 500
-        y: 150
-        opacity:0.8
+        x: 510
+        y: parent.height/5.7
+        width:parent.width/2.4
+        height:parent.height/1.4
+        opacity:1
+        layoutId: 102
+        backgroundColor:"black"
 
     }
 
     // Gear Component
     GearComponent {
         id: gearComponent
-        x: parent.width/2 -width
-        y: parent.height -100
+        x: 500 + mapComponent.x-gearComponent.width-60
+        y: parent.height -60
     }
 
     // Material Status Component

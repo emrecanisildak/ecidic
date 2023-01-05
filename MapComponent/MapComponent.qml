@@ -5,11 +5,12 @@ import QtLocation 5.6
 import QtPositioning 5.6
 
 
-Rectangle{
+Item{
+    property int layoutId: 102
+    property string backgroundColor:"red"
+
     id:mapComponent
-    width:700
-    height:500
-    z: 102
+    z: layoutId
     Plugin {
         id: mapPlugin
         name: "osm"
@@ -18,10 +19,61 @@ Rectangle{
     Map {
         anchors.fill: mapComponent
         plugin: mapPlugin
-        zoomLevel: 8
+        zoomLevel: 15
         minimumZoomLevel: 0
-        maximumZoomLevel: 15
-        center: QtPositioning.coordinate(39.32,34)
-        activeMapType: supportedMapTypes[4]
+        maximumZoomLevel: 20
+        center: QtPositioning.coordinate(39.1,33.9)
+        activeMapType: supportedMapTypes[3]
     }
+
+
+    Rectangle{
+        id:transationRect
+        color:"transparent"
+        opacity:0.9
+        z:layoutId+1
+        width:parent.width
+        height:parent.height
+        anchors.centerIn: parent
+        antialiasing: true
+
+
+        LinearGradient {
+            anchors.fill: parent
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: backgroundColor }
+                GradientStop { position: 0.2; color: "transparent" }
+            }
+        }
+
+        LinearGradient {
+            anchors.fill: parent
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0.0; color: backgroundColor }
+                GradientStop { position: 0.2; color: "transparent" }
+            }
+        }
+
+        LinearGradient {
+            anchors.fill: parent
+            gradient: Gradient {
+                orientation: Gradient.Vertical
+                GradientStop { position: 0.8; color: "transparent" }
+                GradientStop { position: 1; color:backgroundColor }
+            }
+        }
+
+        LinearGradient {
+            anchors.fill: parent
+            gradient: Gradient {
+                orientation: Gradient.Horizontal
+                GradientStop { position: 0.8; color: "transparent" }
+                GradientStop { position: 1; color: backgroundColor }
+            }
+        }
+    }
+
+
+
 }
