@@ -11,5 +11,10 @@
         <file>StatusBarComponent/icon_statusbar/user.png</file>
         <file>StatusBarComponent/icon_statusbar/wifi.png</file>
         <file>MapComponent/MapComponent.qml</file>
+        <file>NotificationComponent/DurationAnimation.qml</file>
+        <file>NotificationComponent/EndAnimation.qml</file>
+        <file>NotificationComponent/NotificationComponent.qml</file>
+        <file>NotificationComponent/StartingAnimation.qml</file>
+        <file>NotificationComponent/icons/lightning.png</file>
     </qresource>
 </RCC>

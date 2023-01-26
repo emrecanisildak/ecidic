@@ -4,10 +4,13 @@ import QtGraphicalEffects 1.12
 import QtLocation 5.6
 import QtPositioning 5.6
 
+import QtQuick.Controls 2.0
+
 import "SpeedComponent"
 import "GearComponent"
 import "StatusBarComponent"
 import "MapComponent"
+import "NotificationComponent"
 
 
 Window {
@@ -20,6 +23,9 @@ Window {
 
     color: backgroundColor
     flags: Qt.FramelessWindowHint
+
+
+
 
     MySpeedComponent {
         id: speedComponent
@@ -72,5 +78,33 @@ Window {
         x: 400
         y: 40
     }
+
+    NotificationComponent {
+        id: notificationComponent
+        anchors.top: mapComponent.top
+        anchors.horizontalCenter: mapComponent.horizontalCenter
+        width: 650
+        height:150
+        z:103
+    }
+
+    // TEST CODE FOR NOTIFICATION
+//    Row{
+//    Button {
+//        text: "Ok"
+//        onClicked: notificationComponent.notify("qrc:/NotificationComponent/icons/lightning.png","Arabanızın sarjı bitmek üzere",1000)
+//    }
+
+//    Button {
+//        text: "YES"
+//        onClicked: notificationComponent.state = "YES"
+//    }
+
+//    Button {
+//        text: "NO"
+//        onClicked: notificationComponent.state = "NO"
+//    }
+//   }
+
 
 }
