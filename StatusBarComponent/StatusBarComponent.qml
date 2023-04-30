@@ -3,10 +3,13 @@ import QtQuick.Window 2.15
 import QtGraphicalEffects 1.12
 import QtQuick.Layouts 1.15
 
-Item{
+Rectangle{
+    property string backgroundColor:"black"
+
     id:statusBarComponent
     width: 550
     height: 20
+    color:backgroundColor
     RowLayout
     {
         id:statusBarLayout

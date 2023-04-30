@@ -14,17 +14,14 @@ Item{
     id:gearComponent
     width: 200
     height:200
-    // TODO CHANGE
-    // TODO CHANGE
 
-    // Model  TODO : C++ Code Implementation
-    ListModel {
-        id: gearModel
-        ListElement { name: "Park";    symbol: "P"; isActive: false;}
-        ListElement { name: "Reverse"; symbol: "R"; isActive: false;}
-        ListElement { name: "Neutral"; symbol: "N"; isActive: true;}
-        ListElement { name: "Drive";   symbol: "D"; isActive: false;}
-        ListElement { name: "Speed";   symbol: "S"; isActive: false;}
+    ListView {
+        anchors.fill: parent
+        orientation: ListView.Horizontal
+        model: gear_model
+        delegate: gearDelegate
+        spacing: gearComponent.layoutSpacing
+
     }
 
     // Delegate
@@ -54,13 +51,6 @@ Item{
         }
     }
 
-    ListView {
-        anchors.fill: parent
-        orientation: ListView.Horizontal
-        model: gearModel
-        delegate: gearDelegate
-        spacing: gearComponent.layoutSpacing
 
-    }
 
 }

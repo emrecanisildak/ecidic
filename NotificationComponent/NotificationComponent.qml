@@ -123,6 +123,17 @@ Item{
             z:notificationLayer+1
         }
 
+        // Top animation rect
+        Rectangle{
+            id:topRect3
+            color:"black"
+            x:0
+            y:0
+            height:1
+            width:parent.width
+            z:notificationLayer+3
+        }
+
         // Bottom animation rect
         Rectangle{
             id:bottomRect

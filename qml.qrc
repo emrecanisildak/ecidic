@@ -16,5 +16,6 @@
         <file>NotificationComponent/NotificationComponent.qml</file>
         <file>NotificationComponent/StartingAnimation.qml</file>
         <file>NotificationComponent/icons/lightning.png</file>
+        <file>PowerConsumptionComponent/PowerConsumptionChart.qml</file>
     </qresource>
 </RCC>

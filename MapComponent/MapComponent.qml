@@ -24,6 +24,7 @@ Item{
         maximumZoomLevel: 20
         center: QtPositioning.coordinate(39.1,33.9)
         activeMapType: supportedMapTypes[3]
+        copyrightsVisible :false
     }
 
 

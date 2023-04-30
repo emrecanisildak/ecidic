@@ -6,11 +6,13 @@ import QtPositioning 5.6
 
 import QtQuick.Controls 2.0
 
+
 import "SpeedComponent"
 import "GearComponent"
 import "StatusBarComponent"
 import "MapComponent"
 import "NotificationComponent"
+import "PowerConsumptionComponent"
 
 
 Window {
@@ -22,7 +24,7 @@ Window {
     height: 800
 
     color: backgroundColor
-    flags: Qt.FramelessWindowHint
+    //flags: Qt.FramelessWindowHint
 
 
 
@@ -75,36 +77,51 @@ Window {
     // Material Status Component
     StatusBarComponent {
         id: statusBarComponent
-        x: 400
+        x: 380
         y: 40
+        width: 900
+        height:40
+        z:104
+        opacity:1
     }
 
     NotificationComponent {
         id: notificationComponent
-        anchors.top: mapComponent.top
-        anchors.horizontalCenter: mapComponent.horizontalCenter
+        x:570
+        y:78
         width: 650
-        height:150
+        height:120
         z:103
     }
 
+    PowerConsumptionChart {
+        id: powerConsumptionChart
+        x: 1300
+        y: 100
+    }
+
+
+
+
     // TEST CODE FOR NOTIFICATION
-//    Row{
-//    Button {
-//        text: "Ok"
-//        onClicked: notificationComponent.notify("qrc:/NotificationComponent/icons/lightning.png","Arabanızın sarjı bitmek üzere",1000)
-//    }
+    Row{
+    Button {
+        text: "Ok"
+        onClicked: notificationComponent.notify("qrc:/NotificationComponent/icons/lightning.png",
+                                                "Arabanızın sarjı bitmek üzere.\n Lütfen yeni bir rota belirleyiniz. Belirlemek için sol tuşa basın",
+                                                2000)
+    }
 
-//    Button {
-//        text: "YES"
-//        onClicked: notificationComponent.state = "YES"
-//    }
+    Button {
+        text: "YES"
+        onClicked: notificationComponent.state = "YES"
+    }
 
-//    Button {
-//        text: "NO"
-//        onClicked: notificationComponent.state = "NO"
-//    }
-//   }
+    Button {
+        text: "NO"
+        onClicked: notificationComponent.state = "NO"
+    }
+   }
 
 
 }
