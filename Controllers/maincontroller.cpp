@@ -3,6 +3,10 @@
 
 #include <QQmlContext>
 
+
+
+
+
 #define TEST
 
 #ifdef TEST
@@ -12,7 +16,7 @@
 #endif
 
 ecilib::logic::MainController::MainController():
-    m_qml_engine(nullptr)
+    mQMLEngine(nullptr)
 {
 
 
@@ -51,20 +55,23 @@ ecilib::logic::MainController::MainController():
 
 void ecilib::logic::MainController::init(QQmlApplicationEngine *engine)
 {
+    mQMLEngine = engine;
+    initPowerConstumptionController();
+    initGearController();
+}
+
+void ecilib::logic::MainController::initPowerConstumptionController()
+{
     using namespace ecilib::powerconsumtpion;
+
+    m_power_chart_controller.reset(new powerconsumtpion::PowerConsumtionChartController(mQMLEngine));
+    qmlRegisterType<PowerConsumtionChartController>("com.ecicompany.powerconsumptionchart", 1, 0, "PowerController");
+}
+
+void ecilib::logic::MainController::initGearController()
+{
     using namespace ecilib::gear;
 
-
-
-    m_qml_engine = engine;
-
-    m_power_chart_controller = new powerconsumtpion::PowerConsumtionChartController(m_qml_engine);
-    qmlRegisterType<PowerConsumtionChartController>("com.ecicompany.powerconsumptionchart", 1, 0, "PowerController");
-    m_qml_engine->rootContext()->setContextProperty("power_cc", m_power_chart_controller);
-
-
-
     qmlRegisterType<GearController>("com.ecicompany.gearcontroller", 1, 0, "GearController");
-    m_gear_controller = new GearController(engine);
-
+    m_gear_controller.reset( new GearController(mQMLEngine));
 }

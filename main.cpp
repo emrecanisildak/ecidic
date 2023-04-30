@@ -13,10 +13,9 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
 
-    ecilib::logic::MainController controller;
     QQmlApplicationEngine engine;
 
-
+    ecilib::logic::MainController controller;
     controller.init(&engine);
 
 

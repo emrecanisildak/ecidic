@@ -4,6 +4,7 @@
 #include <QObject>
 #include <map>
 #include <QVariant>
+#include <QPointer>
 
 class QQmlApplicationEngine;
 
@@ -26,9 +27,8 @@ public:
     void     switchMode(GearModes mode);
 
 private:
-    GearComponentModel* mModel;
+    QPointer<GearComponentModel> mModel;
     std::map<GearModes,QString> mModeMap;
-
     void     initGearModel();
 
 };

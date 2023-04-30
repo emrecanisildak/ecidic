@@ -2,12 +2,13 @@
 #define MAINCONTROLLER_H
 
 #include <QObject>
-#include <memory>
-#include "PowerConsumptionComponent/powerconsumtionchartcontroller.h"
+#include <QScopedPointer>
+
 #include "GearComponent/gearcontroller.h"
+#include "PowerConsumptionComponent/powerconsumtionchartcontroller.h"
 
+// Forward Declarations..
 class QQmlApplicationEngine;
-
 
 namespace ecilib::logic{
 
@@ -19,11 +20,12 @@ namespace ecilib::logic{
         void init(QQmlApplicationEngine *engine);
 
     private:
-        QQmlApplicationEngine* m_qml_engine = nullptr;
-        ecilib::powerconsumtpion::PowerConsumtionChartController* m_power_chart_controller;
-        ecilib::gear::GearController* m_gear_controller;
+         QScopedPointer<ecilib::powerconsumtpion::PowerConsumtionChartController> m_power_chart_controller;
+         QScopedPointer<ecilib::gear::GearController> m_gear_controller;
+         QQmlApplicationEngine   *mQMLEngine;
 
-
+        void initPowerConstumptionController();
+        void initGearController();
 
     };
 

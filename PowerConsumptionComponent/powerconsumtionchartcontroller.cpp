@@ -3,6 +3,9 @@
 
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
+#include <QRectF>
+
+
 
 ecilib::powerconsumtpion::PowerConsumtionChartController::PowerConsumtionChartController()
 {
@@ -18,15 +21,16 @@ ecilib::powerconsumtpion::PowerConsumtionChartController::PowerConsumtionChartCo
     setMaxChartPowerConsumption(500);
     setAVGConsumption(300);
 
-    mModel  = new PowerConsumptionChartModel();
-    mMapper = new QVXYModelMapper();
-    mMapper->setModel(mModel);
+    mModel.reset( new PowerConsumptionChartModel());
+    mMapper.reset(new QtCharts::QVXYModelMapper());
+    mMapper->setModel(mModel.get());
 
     mMapper->setXColumn(0);
     mMapper->setYColumn(1);
 
-    engine->rootContext()->setContextProperty("power_cc_model", mModel);
-    engine->rootContext()->setContextProperty("power_cc_mapper", mMapper);
+    engine->rootContext()->setContextProperty("power_cc", this);
+    engine->rootContext()->setContextProperty("power_cc_model", mModel.get());
+    engine->rootContext()->setContextProperty("power_cc_mapper", mMapper.get());
 }
 
 void ecilib::powerconsumtpion::PowerConsumtionChartController::onConsumptionDataOccured(double pTDT, double pConsumption)

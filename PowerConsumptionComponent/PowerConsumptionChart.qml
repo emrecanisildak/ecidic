@@ -4,13 +4,7 @@ import QtQuick.Shapes 1.4
 
 
 Item{
-    property real minimumConsumption: power_cc.minChartPowerConsumption
-    property real maximumConsumption: power_cc.maxChartPowerConsumption
-    property real averageConsumption: power_cc.aVGConsumption
-    property real yPOSAvgConsumption: power_cc.yPosAVGLine
-    property real minXVal: power_cc.minChartTDT
-
-    id:powerConsumptionChart
+    id:root
     width:500
     height:550
     z:104
@@ -33,7 +27,7 @@ Item{
         // X AXIS
         ValueAxis {
             id: xAxis
-            min:minXVal
+            min:power_cc.minChartTDT
             max:0
             tickCount: 4
             color:"red"
@@ -44,14 +38,15 @@ Item{
         // Y AXIS
         ValueAxis {
             id: yAxis
-            min: powerConsumptionChart.minimumConsumption
-            max: powerConsumptionChart.maximumConsumption
+            min: power_cc.minChartPowerConsumption
+            max: power_cc.maxChartPowerConsumption
             tickCount:5
             color:"red"
             gridLineColor: "red"
             labelsColor: "gray"
         }
 
+        // Data Model
         LineSeries {
             id:series10
             axisX: xAxis
@@ -59,6 +54,7 @@ Item{
             color:"gray"
         }
 
+        // AVG Line
         Shape {
             id:avgConsumptionLine
             width: powerChart.width
@@ -72,7 +68,7 @@ Item{
                 strokeStyle: ShapePath.DashLine
                 dashPattern: [ 1, 4 ]
                 startX: powerChart.plotArea.x +5 ;
-                startY: powerConsumptionChart.yPOSAvgConsumption
+                startY: power_cc.yPosAVGLine
                 PathLine {
                     id:avgConsumptionPathLine
                     x: powerChart.plotArea.x + powerChart.plotArea.width+7;
