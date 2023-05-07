@@ -2,14 +2,13 @@
 #define GEARCONTROLLER_H
 
 #include <QObject>
+#include <QScopedPointer>
 #include <map>
-#include <QVariant>
-#include <QPointer>
 
+namespace ecilib::gear{class GearComponentModel;}
 class QQmlApplicationEngine;
 
 namespace ecilib::gear{
-class GearComponentModel;
 
 enum GearModes{
     PARK,
@@ -24,13 +23,15 @@ class GearController : public QObject
 public:
     explicit GearController(QQmlApplicationEngine* engine);
     GearController();
+    ~GearController();
     void     switchMode(GearModes mode);
 
 private:
-    QPointer<GearComponentModel> mModel;
+    QScopedPointer<GearComponentModel> mModel;
     std::map<GearModes,QString> mModeMap;
     void     initGearModel();
 
+    Q_DISABLE_COPY(GearController)
 };
 }
 

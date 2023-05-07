@@ -1,7 +1,5 @@
 #include "gearcomponentmodel.h"
 
-#include <QDebug>
-
 ecilib::gear::GearComponentModel::GearComponentModel()
 {
     mRoleNames[ModeSymbol] = "symbol";

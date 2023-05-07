@@ -2,13 +2,16 @@
 
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include <QDebug>
-
 #include "Model/gearcomponentmodel.h"
 
 
 ecilib::gear::GearController::GearController()
 {
+}
+
+ecilib::gear::GearController::~GearController()
+{
+
 }
 
 ecilib::gear::GearController::GearController(QQmlApplicationEngine *engine)
@@ -20,7 +23,7 @@ ecilib::gear::GearController::GearController(QQmlApplicationEngine *engine)
     mModeMap[SPEED]   = "Speed";
 
     initGearModel();
-    engine->rootContext()->setContextProperty("gear_model", mModel);
+    engine->rootContext()->setContextProperty("gear_model", mModel.get());
 }
 
 void ecilib::gear::GearController::switchMode(GearModes mode)
@@ -28,12 +31,15 @@ void ecilib::gear::GearController::switchMode(GearModes mode)
     if(const auto& itr = mModeMap.find(mode); itr != mModeMap.end())
         mModel->switchMode(mModeMap[mode]);
     else
-        qWarning()<<"Gear Mode could not find!";
+    {
+        // TODO LOGGER : Switch Mode not found..
+
+    }
 }
 
 void ecilib::gear::GearController::initGearModel()
 {
-    mModel = new GearComponentModel();
+    mModel.reset(new GearComponentModel());
 
     for(const auto &p : mModeMap)
     {

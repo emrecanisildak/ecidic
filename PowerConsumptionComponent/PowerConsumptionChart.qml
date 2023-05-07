@@ -19,6 +19,9 @@ Item{
         plotAreaColor: "black"
 
         Component.onCompleted: {
+            console.log(powerChart.plotArea)
+            power_cc.scopeAreaRect = powerChart.plotArea
+
             console.log("Power consumption controller component loaded..")
             console.log(powerChart.plotArea) // todo cpp
             power_cc_mapper.series = series10

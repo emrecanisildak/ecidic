@@ -1,18 +1,13 @@
 #ifndef POWERCONSUMPTIONCHARTMODEL_H
 #define POWERCONSUMPTIONCHARTMODEL_H
 
-
-// Qt Libs
 #include <QAbstractTableModel>
 #include <QObject>
-#include <QTimer>
 
-// Standart
 #include <vector>
-
-// User Defined
 #include "PowerConsumptionComponent/powerconsumtionitem.h"
 
+class QTimer;
 namespace ecilib::powerconsumtpion
 {
 class PowerConsumptionChartModel : public QAbstractTableModel
@@ -35,11 +30,14 @@ private:
         };
 
     std::vector<PowerConsumtionItem> mData;
-    QTimer mTimer;
+    QScopedPointer<QTimer> mTimer;
 
     double mCurrentTDT{0.0};
     double mChartMaxTDT{30.0};
 
+
+    static constexpr  int mColumnCount{2};
+    static constexpr  int mTimerTickInterval{10}; // ms
 };
 }
 

@@ -3,8 +3,10 @@
 
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
-#include <QRectF>
+#include <QVXYModelMapper>
+#include  "Models/powerconsumptionchartmodel.h"
 
+#include <QTimer>
 
 
 ecilib::powerconsumtpion::PowerConsumtionChartController::PowerConsumtionChartController()
@@ -19,7 +21,9 @@ ecilib::powerconsumtpion::PowerConsumtionChartController::PowerConsumtionChartCo
     setMaxChartTDT(0);
     setMinChartPowerConsumption(-300);
     setMaxChartPowerConsumption(500);
-    setAVGConsumption(300);
+
+    // TODO : TRICKY WILL BE FIXED..
+    QTimer::singleShot(1000,[this](){setAVGConsumption(300);});
 
     mModel.reset( new PowerConsumptionChartModel());
     mMapper.reset(new QtCharts::QVXYModelMapper());
@@ -31,6 +35,10 @@ ecilib::powerconsumtpion::PowerConsumtionChartController::PowerConsumtionChartCo
     engine->rootContext()->setContextProperty("power_cc", this);
     engine->rootContext()->setContextProperty("power_cc_model", mModel.get());
     engine->rootContext()->setContextProperty("power_cc_mapper", mMapper.get());
+}
+
+ecilib::powerconsumtpion::PowerConsumtionChartController::~PowerConsumtionChartController()
+{
 }
 
 void ecilib::powerconsumtpion::PowerConsumtionChartController::onConsumptionDataOccured(double pTDT, double pConsumption)
@@ -50,6 +58,12 @@ void ecilib::powerconsumtpion::PowerConsumtionChartController::setMaxChartPowerC
         return;
     mMaxChartPowerConsumption = newMaxChartPowerConsumption;
     emit maxChartPowerConsumptionChanged();
+}
+
+void ecilib::powerconsumtpion::PowerConsumtionChartController::setScopeAreaRect(const QRectF &rect)
+{
+    mScopeAreaRect = rect;
+    emit scopeAreaRectChanged();
 }
 
 
@@ -105,9 +119,7 @@ void ecilib::powerconsumtpion::PowerConsumtionChartController::setAVGConsumption
     mAVGConsumption = newAVGConsumption;
     emit aVGConsumptionChanged();
 
-
-    // TODO FROM QML
-    calculateYPOSAVG(mAVGConsumption);
+    calculateYPOSAVG();
 }
 
 
@@ -125,21 +137,18 @@ void ecilib::powerconsumtpion::PowerConsumtionChartController::setYPosAVGLine(do
 }
 
 
-void ecilib::powerconsumtpion::PowerConsumtionChartController::calculateYPOSAVG(double AVG)
+void ecilib::powerconsumtpion::PowerConsumtionChartController::calculateYPOSAVG()
 {
-    QRectF rect(69, 52.5, 388, 448.5);
-
-    // Calculate YPOS
     double y = (mAVGConsumption - mMinChartPowerConsumption) / (mMaxChartPowerConsumption - mMinChartPowerConsumption);
-    y =  y*(rect.height());
-    y =rect.height() - y + rect.y();
+    y =  y*(mScopeAreaRect.height());
+    y =mScopeAreaRect.height() - y + mScopeAreaRect.y();
 
     setYPosAVGLine(y);
 }
 
 
-
-
-
-
+const QRectF &ecilib::powerconsumtpion::PowerConsumtionChartController::scopeAreaRect() const
+{
+    return mScopeAreaRect;
+}
 

@@ -1,10 +1,13 @@
 #include "powerconsumptionchartmodel.h"
 
+#include <QTimer>
+
 ecilib::powerconsumtpion::PowerConsumptionChartModel::PowerConsumptionChartModel()
 {
+    mTimer.reset(new QTimer);
     mData.reserve(1000);
-    mTimer.start(10);
-    connect(&mTimer, &QTimer::timeout, this,[&](){onTimeOut();});
+    mTimer->start(mTimerTickInterval);
+    connect(mTimer.get(), &QTimer::timeout, this,[&](){onTimeOut();});
 }
 
 void ecilib::powerconsumtpion::PowerConsumptionChartModel::addNewData(const PowerConsumtionItem &item)
@@ -18,12 +21,14 @@ void ecilib::powerconsumtpion::PowerConsumptionChartModel::addNewData(const Powe
 
 int ecilib::powerconsumtpion::PowerConsumptionChartModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     return static_cast<int>(mData.size());
 }
 
 int ecilib::powerconsumtpion::PowerConsumptionChartModel::columnCount(const QModelIndex &parent) const
 {
-    return 2;
+    Q_UNUSED(parent)
+    return mColumnCount;
 }
 
 QVariant ecilib::powerconsumtpion::PowerConsumptionChartModel::data(const QModelIndex &index, int role) const

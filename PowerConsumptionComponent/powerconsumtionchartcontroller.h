@@ -1,14 +1,13 @@
 #ifndef POWERCONSUMTIONCHARTCONTROLLER_H
 #define POWERCONSUMTIONCHARTCONTROLLER_H
 
-// Qt's Lib
 #include <QObject>
-#include <QScopedPointer>
-#include <QVXYModelMapper>
-#include  "Models/powerconsumptionchartmodel.h"
+#include <QRectF>
 
 
 // Forward Declarations..
+namespace QtCharts{class QVXYModelMapper;};
+namespace ecilib::powerconsumtpion {class PowerConsumptionChartModel;}
 class QQmlApplicationEngine;
 
 namespace ecilib::powerconsumtpion{
@@ -21,26 +20,33 @@ class PowerConsumtionChartController : public QObject
     Q_PROPERTY(int minChartPowerConsumption READ minChartPowerConsumption WRITE setMinChartPowerConsumption NOTIFY minChartPowerConsumptionChanged)
     Q_PROPERTY(int maxChartPowerConsumption READ maxChartPowerConsumption WRITE setMaxChartPowerConsumption NOTIFY maxChartPowerConsumptionChanged)
     Q_PROPERTY(double yPosAVGLine READ yPosAVGLine WRITE setYPosAVGLine NOTIFY yPosAVGLineChanged)
+    Q_PROPERTY(QRectF scopeAreaRect READ scopeAreaRect WRITE setScopeAreaRect NOTIFY scopeAreaRectChanged)
+
 
 public:
     PowerConsumtionChartController();
     explicit PowerConsumtionChartController(QQmlApplicationEngine* engine);
+    ~PowerConsumtionChartController();
 
-
-    double aVGConsumption() const;
     void   setAVGConsumption(double newAVGConsumption);
+    double aVGConsumption() const;
+
     double yPosAVGLine() const;
     void   setYPosAVGLine(double newYPosAVGLine);
+
     int    minChartTDT() const;
     void   setMinChartTDT(int newMinChartTDT);
     int    maxChartTDT() const;
+
     void   setMaxChartTDT(int newMaxChartTDT);
     int    minChartPowerConsumption() const;
     void   setMinChartPowerConsumption(int newMinChartPowerConsumption);
     int    maxChartPowerConsumption() const;
     void   setMaxChartPowerConsumption(int newMaxChartPowerConsumption);
+    void   setScopeAreaRect(const QRectF& rect);
 
 
+    const QRectF &scopeAreaRect() const;
 
 public slots:
     void onConsumptionDataOccured(double pTDT, double pConsumption);
@@ -52,6 +58,7 @@ signals:
     void minChartPowerConsumptionChanged();
     void maxChartPowerConsumptionChanged();
     void yPosAVGLineChanged();
+    void scopeAreaRectChanged();
 
 
 private:
@@ -61,10 +68,14 @@ private:
     int    mMaxChartTDT;
     int    mMinChartPowerConsumption;
     int    mMaxChartPowerConsumption;
-    void   calculateYPOSAVG(double AVG);
+    void   calculateYPOSAVG();
+
+    QRectF mScopeAreaRect;
 
     QScopedPointer<PowerConsumptionChartModel> mModel;
     QScopedPointer<QtCharts::QVXYModelMapper> mMapper;
+
+    Q_DISABLE_COPY(PowerConsumtionChartController)
 };
 
 }

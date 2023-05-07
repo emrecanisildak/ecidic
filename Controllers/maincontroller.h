@@ -4,30 +4,30 @@
 #include <QObject>
 #include <QScopedPointer>
 
-#include "GearComponent/gearcontroller.h"
-#include "PowerConsumptionComponent/powerconsumtionchartcontroller.h"
-
-// Forward Declarations..
+namespace ecilib::powerconsumtpion{ class PowerConsumtionChartController;}
+namespace ecilib::gear {class GearController;}
 class QQmlApplicationEngine;
 
 namespace ecilib::logic{
+class MainController : public QObject
+{
+    Q_OBJECT
+public:
+    MainController();
+    ~MainController();
+    void init(QQmlApplicationEngine *engine);
 
-    class MainController : public QObject
-    {
-        Q_OBJECT
-    public:
-        explicit MainController();
-        void init(QQmlApplicationEngine *engine);
+private:
+    QScopedPointer<ecilib::powerconsumtpion::PowerConsumtionChartController> m_power_chart_controller;
+    QScopedPointer<ecilib::gear::GearController> m_gear_controller;
+    QQmlApplicationEngine   *mQMLEngine;
 
-    private:
-         QScopedPointer<ecilib::powerconsumtpion::PowerConsumtionChartController> m_power_chart_controller;
-         QScopedPointer<ecilib::gear::GearController> m_gear_controller;
-         QQmlApplicationEngine   *mQMLEngine;
+    void initPowerConstumptionController();
+    void initGearController();
 
-        void initPowerConstumptionController();
-        void initGearController();
+    Q_DISABLE_COPY(MainController)
 
-    };
+};
 
 }
 #endif // MAINCONTROLLER_H

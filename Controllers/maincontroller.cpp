@@ -2,16 +2,14 @@
 #include <QQmlApplicationEngine>
 
 #include <QQmlContext>
-
-
-
+#include "GearComponent/gearcontroller.h"
+#include "PowerConsumptionComponent/powerconsumtionchartcontroller.h"
 
 
 #define TEST
 
 #ifdef TEST
 #include <QTimer>
-#include <QDebug>
 #include <QRandomGenerator64>
 #endif
 
@@ -27,10 +25,10 @@ ecilib::logic::MainController::MainController():
     QTimer* timer2 = new QTimer(this);
     timer2->start(5000);
 
-        connect(timer2,&QTimer::timeout,[&](){
-    m_gear_controller->switchMode((gear::GearModes)QRandomGenerator::global()->bounded(0,5));
+    connect(timer2,&QTimer::timeout,[&](){
+        m_gear_controller->switchMode((gear::GearModes)QRandomGenerator::global()->bounded(0,5));
 
-  });
+    });
 
 
 
@@ -51,7 +49,9 @@ ecilib::logic::MainController::MainController():
 
 }
 
-
+ecilib::logic::MainController::~MainController()
+{
+}
 
 void ecilib::logic::MainController::init(QQmlApplicationEngine *engine)
 {
