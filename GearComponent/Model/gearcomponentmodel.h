@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QAbstractListModel>
-#include "GearComponent/gearitem.h"
+#include <GearComponent/gearitem.h>
 
 namespace ecilib::gear{
 class GearComponentModel : public QAbstractListModel

@@ -2,8 +2,8 @@
 #include <QQmlApplicationEngine>
 
 #include <QQmlContext>
-#include "GearComponent/gearcontroller.h"
-#include "PowerConsumptionComponent/powerconsumtionchartcontroller.h"
+#include <GearComponent/gearcontroller.h>
+#include <PowerConsumptionComponent/powerconsumtionchartcontroller.h>
 
 
 #define TEST

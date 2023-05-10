@@ -5,7 +5,7 @@
 #include <QObject>
 
 #include <vector>
-#include "PowerConsumptionComponent/powerconsumtionitem.h"
+#include <PowerConsumptionComponent/powerconsumtionitem.h>
 
 class QTimer;
 namespace ecilib::powerconsumtpion

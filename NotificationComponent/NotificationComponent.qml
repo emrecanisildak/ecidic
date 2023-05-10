@@ -64,7 +64,7 @@ Item{
     property string iconPath:""
     property int    symbolSize: 32
 
-    function notify(iconSource, conText, duration){
+     function notify(iconSource, conText, duration){
         notificationComponent.state = "DEFAULT"
         notificationAnim.start()
         notificationDuration = duration

@@ -4,7 +4,7 @@
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
 #include <QVXYModelMapper>
-#include  "Models/powerconsumptionchartmodel.h"
+#include "Models/powerconsumptionchartmodel.h"
 
 #include <QTimer>
 

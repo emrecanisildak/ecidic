@@ -10,6 +10,7 @@ SOURCES += \
         Controllers/maincontroller.cpp \
         GearComponent/Model/gearcomponentmodel.cpp \
         GearComponent/gearcontroller.cpp \
+        NotificationComponent/notificationcomponentcontroller.cpp \
         PowerConsumptionComponent/Models/powerconsumptionchartmodel.cpp \
         PowerConsumptionComponent/powerconsumtionchartcontroller.cpp \
         main.cpp
@@ -32,6 +33,8 @@ HEADERS += \
     GearComponent/Model/gearcomponentmodel.h \
     GearComponent/gearcontroller.h \
     GearComponent/gearitem.h \
+    NotificationComponent/notificationcomponentcontroller.h \
+    NotificationComponent/notificationitem.h \
     PowerConsumptionComponent/Models/powerconsumptionchartmodel.h \
     PowerConsumptionComponent/powerconsumtionchartcontroller.h \
     PowerConsumptionComponent/powerconsumtionitem.h
