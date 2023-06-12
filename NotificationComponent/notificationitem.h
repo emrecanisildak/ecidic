@@ -6,6 +6,14 @@
 
 namespace ecilib::notification{
 
+enum class CloseType
+{
+    NO_ANIMATION,
+    YES = 0,
+    NO = 1
+};
+
+
 enum class NotificationType
 {
     YesOrNo = 0,
@@ -24,9 +32,9 @@ enum class NotificationStatus
 
 struct NotificationItem
 {
-    NotificationItem(int pId, const QString& pMessage,const QString& pIconPath,
+    NotificationItem(uint64_t pId, const QString& pMessage,const QString& pIconPath,
                      NotificationType pType,NotificationStatus pStatus,
-                     std::chrono::nanoseconds pDisplayTime,std::chrono::milliseconds pDuration):
+                     int pDuration,uint64_t pDisplayTime):
         mId{pId},
         mMessage{pMessage},
         mIconPath{pIconPath},
@@ -38,24 +46,29 @@ struct NotificationItem
 
     }
     NotificationItem():
-        mId{},
+        mId{0},
         mMessage{},
         mIconPath{},
         mType{},
-        mStatus{},
+        mStatus{NotificationStatus::None},
         mDisplayTime{},
         mDuration{}
     {
 
     }
 
-    int                             mId;
+    bool isValidNotification()const
+    {
+        return mId > 0;
+    }
+
+    uint64_t                        mId;
     QString                         mMessage;
     QString                         mIconPath;
     NotificationType                mType;
     NotificationStatus              mStatus;
-    std::chrono::nanoseconds        mDisplayTime; // ns Timestamp of the first display of the notification.
-    std::chrono::milliseconds       mDuration;    // ms   Notification display duration
+    uint64_t                        mDisplayTime; // ms   Timestamp of the first display of the notification.
+    int                             mDuration;    // ms   Notification display duration
 
 };
 

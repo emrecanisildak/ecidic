@@ -29,6 +29,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    Common/utility.h \
     Controllers/maincontroller.h \
     GearComponent/Model/gearcomponentmodel.h \
     GearComponent/gearcontroller.h \

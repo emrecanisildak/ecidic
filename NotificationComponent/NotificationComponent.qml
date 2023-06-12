@@ -35,6 +35,17 @@ Item{
         State {
             name: "DEFAULT"
              PropertyChanges { target:notificationComponent; notificationBorderColor:notificationDefaultColor; }
+        },
+        State{
+            name:  "CLOSE_USER_STATE"
+            StateChangeScript {
+                         name: "CLOSE_FROM_USER"
+                         script:{
+                         notificationAnim.stop()
+                         notificationOpacity:notificationRect.opacity
+                         endAnim.start()
+                         }
+                     }
         }
 
     ]

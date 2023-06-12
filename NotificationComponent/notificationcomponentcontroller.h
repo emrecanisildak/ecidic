@@ -2,6 +2,7 @@
 #define NOTIFICATIONCOMPONENTCONTROLLER_H
 
 #include <QObject>
+#include <any>
 #include <NotificationComponent/notificationitem.h>
 
 namespace ecilib::notification{
@@ -12,7 +13,7 @@ class NotificationComponentController : public QObject
 public:
     explicit NotificationComponentController(QObject *parent = nullptr);
 
-    void               pushNotification(const QString& pMessage,const QString& pIconPath, NotificationType pType);
+    uint64_t           pushNotification(const QString& message,const QString& iconPath, NotificationType type,int duration);
     NotificationItem   currentNotification()const;
     void               closeCurrentNotification();
     NotificationStatus getCurrentStatus(uint64_t id)const;
@@ -27,7 +28,9 @@ signals:
 
 private:
     std::vector<NotificationItem> mNotificationsQueue;
-    static uint64_t  generateUniqueId();
+
+    void closeToQMLItem(CloseType type);
+
 
 
 };
